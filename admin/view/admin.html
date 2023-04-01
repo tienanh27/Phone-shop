@@ -67,10 +67,19 @@
   </header>
 
   <div class="container py-5" id="content-wrap">
+
     <main role="main" class="mt-5">
       <div class='d-flex justify-content-between mb-2 py-3 px-2 phoneBanner'>
         <h3 class="text-light">Phone Management</h3>
-        <div class="text-right">
+
+        <!-- Search button  -->
+        <form class="d-flex">
+          <input class="form-control me-1 " type="search" placeholder="Search" aria-label="Search" id="searchInput">
+          <button class="btn btn-outline-success" type="submit" id="searchBtn">Search</button>
+        </form>
+
+        <!-- Add phone button  -->
+        <div class="text-left">
           <button type="button" class="btn btn-banner" data-bs-toggle="modal" data-bs-target="#exampleModal"
             id="addPhoneForm">
             <i class="fa-solid fa-circle-plus me-2"></i> Add Phone
@@ -151,6 +160,7 @@
 
                   <span class="sp-thongbao" id="tbbackCam"></span>
                 </div>
+
                 <div class="form-group">
                   <div class="input-group">
                     <div class="input-group-prepend">
@@ -161,6 +171,7 @@
 
                   <span class="sp-thongbao" id="tbfrontCam"></span>
                 </div>
+
                 <div class="form-group">
                   <div class="input-group">
                     <div class="input-group-prepend">
@@ -171,6 +182,7 @@
 
                   <span class="sp-thongbao" id="tbimg"></span>
                 </div>
+
                 <div class="form-group">
                   <div class="input-group">
                     <div class="input-group-prepend">
@@ -218,11 +230,7 @@
         </div>
       </div>
     </main>
-
-
-
   </div>
-
 
   <!-- Footer -->
   <footer class="text-center text-lg-start bg-dark text-light gradient-custom">
@@ -341,6 +349,13 @@
     <!-- Copyright -->
   </footer>
   <!-- Footer -->
+
+
+
+
+
+
+
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"
     integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g=="

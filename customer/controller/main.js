@@ -135,14 +135,21 @@ window.onload = async () => {
   renderCart(cart);
 };
 
-//lọc phone theo hãng
-getEle('selectList').onchange = async () => {
+//Sort out the phones by brands
+//Get the select element by its ID
+const selectList = document.getElementById('selectList');
+//Add an event listener to the select element
+selectList.addEventListener('change', async () => {
+  // Get all the phones from the service
   const data = await service.getPhones();
-  const selectValue = getEle('selectList').value;
-  let filterData =
-    selectValue == 'all' ? data : data.filter((ele) => ele.type == selectValue);
+  // Get the value of the selected option
+  const selectValue = selectList.value;
+  // Filter the phones based on the selected option
+  let filterData = (selectValue === 'all') ? data : data.filter((phone) => phone.type === selectValue);
+  // Render the filtered phones
   renderList(filterData);
-};
+});
+
 
 window.btnAddToCart = async (productId) => {
   const phoneData = await service.getPhoneById(productId);
@@ -165,7 +172,7 @@ window.btnAddToCart = async (productId) => {
   localStorage.setItem('cart', JSON.stringify(cart));
 };
 
-// dấu cộng trong giỏ hàng
+// Thêm đơn hàng vào giỏ, nếu đã có rồi thì cộng thêm 1, 
 window.btnAdd = (id) => {
   let cartItem = findItemById(cart, id);
   if (cartItem) cartItem.quantity++;

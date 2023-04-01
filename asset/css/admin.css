@@ -112,6 +112,10 @@ header #navbarColor01 a:hover {
   align-items: center;
 }
 
+.sort-by-price {
+  font-weight: bold;
+}
+
 footer {
   /* position: absolute; */
   bottom: 0;

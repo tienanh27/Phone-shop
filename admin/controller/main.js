@@ -3,7 +3,7 @@
 
 // function showTable(arrayData) {
 //     var content = "";
-  
+
 //     arrayData.forEach(function (product, index) {
 //       content += `
 //         <tr>
@@ -23,11 +23,11 @@
 //         </tr>
 //       `;
 //     });
-  
+
 //     // đem các hàng trên lên giao diện 
 //     document.querySelector("#tblDanhSachSP").innerHTML = content;
 //   }
-  
+
 
 // //hiển thị danh sách khi thành công
 // function showProductList() {
@@ -188,7 +188,7 @@
 //         });
 // }
 
-// //Sort products by Price
+// // //Sort products by Price
 // function sortByPrice() {
 //     var axiosResult = productSer.getProductList();
 
@@ -217,10 +217,11 @@
 //         .catch(function (error) {
 //             console.log(error);
 //         });
-//
+// //
 const getEle = (id) => document.getElementById(id);
 const resetForm = (formId) => getEle(formId).reset();
 
+// Importing necessary modules and classes
 import { CustomModal, Helper } from './custom.js';
 import { Services } from '../services/phoneService.js';
 import { Validate } from './validate.js';
@@ -283,6 +284,7 @@ window.btnDelete = async (id) => {
   }
 };
 
+// Edit form 
 window.btnEdit = async (id) => {
   helper.clearTB();
   getEle('btnUpdate').style.display = 'inline-block';
@@ -290,8 +292,12 @@ window.btnEdit = async (id) => {
 
   let data = await service.getPhoneById(id);
   let arrObjValue = Object.keys(data).map((k) => data[k]);
-  arrObjValue.pop(); // Remove id from array
-  helper.fill(arrObjValue); // fill the form with values
+
+  // Bỏ id ở đầu form 
+  arrObjValue.shift();
+
+  // fill the form with values
+  helper.fill(arrObjValue);
 
   getEle('btnUpdate').onclick = async () => {
     const phoneList = await service.getPhones();
@@ -304,3 +310,32 @@ window.btnEdit = async (id) => {
     CustomModal.alertSuccess('Update phone successfully');
   };
 };
+
+// Thêm sự kiện cho nút tìm kiếm
+$('#searchBtn').on('click', function (e) {
+  e.preventDefault();
+  var searchText = $('#searchInput').val().toLowerCase();
+
+  // Lọc danh sách sản phẩm theo tên
+  $('#myTable tbody tr').filter(function () {
+    $(this).toggle($(this).text().toLowerCase().indexOf(searchText) > -1);
+  });
+});
+
+const url = new URL('https://6421e4b886992901b2be90ec.mockapi.io/Product/1/tasks');
+url.searchParams.append('sortBy', 'title');
+url.searchParams.append('order', 'desc'); // order parameter is optional and will default to `asc`
+
+fetch(url, {
+  method: 'GET',
+  headers: {'content-type':'application/json'},
+}).then(res => {
+  if (res.ok) {
+      return res.json();
+  }
+  // handle error
+}).then(tasks => {
+  // list of tasks sorted by title in descending order
+}).catch(error => {
+  // handle error
+})
