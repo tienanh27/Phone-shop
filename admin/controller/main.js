@@ -322,20 +322,20 @@ $('#searchBtn').on('click', function (e) {
   });
 });
 
-const url = new URL('https://6421e4b886992901b2be90ec.mockapi.io/Product/1/tasks');
-url.searchParams.append('sortBy', 'title');
-url.searchParams.append('order', 'desc'); // order parameter is optional and will default to `asc`
+// Define the sortData function in the global scope
+function sortData() {
+  fetch('https://6421e4b886992901b2be90ec.mockapi.io/Product')
+    .then(response => response.json())
+    .then(data => {
+      data.sort((a, b) => a.price - b.price);
+      // Replace the console.log with your desired function to display the sorted data
+      console.log(data);
+    })
+    .catch(error => console.error(error));
+}
 
-fetch(url, {
-  method: 'GET',
-  headers: {'content-type':'application/json'},
-}).then(res => {
-  if (res.ok) {
-      return res.json();
-  }
-  // handle error
-}).then(tasks => {
-  // list of tasks sorted by title in descending order
-}).catch(error => {
-  // handle error
-})
+// Get the button element by its id
+const sortButton = document.getElementById('sort-button');
+
+// Add an event listener to the button element
+sortButton.addEventListener('click', sortData);

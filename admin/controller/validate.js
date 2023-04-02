@@ -5,11 +5,11 @@ export class Validate {
 
   messageSwitch = (isFalse, idTB, message = '') => {
     if (isFalse == false) {
-      getEle(idTB).style.display = 'block';
+      getEle(idTB).style.display = 'block'; // Show the element with the given ID
       getEle(idTB).innerHTML = message;
       return false;
     } else if (isFalse == true) {
-      getEle(idTB).innerHTML = '&#8205'; //invisible (to keep distance between forms unchanged)
+      getEle(idTB).innerHTML = '&#8205'; // Set the innerHTML of the element to an invisible character
       return true;
     }
   };
